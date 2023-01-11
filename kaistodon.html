@@ -9,22 +9,23 @@
     <script type="text/javascript">
       function callback() {
         // Get query hash: /#code=xxxx
-        var hash = window.location.hash
-        console.log(`Hash is ${hash}`)
+        var urlParams = new URLSearchParams(window.location.search)
+        const code = urlParams.get('code')
+        console.log(`Code is ${code}`)
 
-        if (hash != null) {
+        if (code && code !== '') {
           if (typeof MozActivity !== 'undefined') {
             // For KaiOS 2.5
             var activity = new MozActivity({
               name: 'KaistodonCallback',
-              data: { hash },
+              data: { code },
             })
           } else {
             // For KaiOS 3.0
             if (typeof WebActivity !== 'undefined') {
               var activity = new WebActivity('KaistodonCallback', {
-                type: 'hash',
-                hash,
+                type: 'code',
+                code,
               })
               activity.start().then(
                 rv => {
