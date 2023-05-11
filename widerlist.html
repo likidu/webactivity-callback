@@ -6,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/vite.svg" />
     <title>WiderList Callback</title>
+    <style>
+      body {
+        font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI',
+          'sans-serif';
+      }
+    </style>
     <script type="text/javascript">
       function callback() {
         // Get query hash: /#code=xxxx
         var hash = window.location.hash
-        console.log(`Hash is ${hash}`)
+        console.log(`Hash is : ${hash}`)
 
         if (hash && hash !== '') {
           if (typeof MozActivity !== 'undefined') {
@@ -43,7 +49,12 @@
   </head>
   <body onload="callback()">
     <h2>Redirecting you back to WiderList App...</h2>
-    <pre id="log" style="color: red"></pre>
+    <div style="width: 95%; overflow: hidden">
+      <span
+        id="log"
+        style="display: inline-block; overflow-wrap: break-word; color: green"
+      ></span>
+    </div>
     <script>
       ;(function () {
         var old = console.log
