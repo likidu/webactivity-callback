@@ -15,7 +15,7 @@
     <script type="text/javascript">
       function callback() {
         // Get query hash: /#code=xxxx
-        var code = window.location.hash
+        var code = window.location.hash.replace(/#code=/i, '')
         console.log(`Hash is : ${code}`)
 
         if (code && code !== '') {
