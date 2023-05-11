@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/vite.svg" />
+    <title>WiderList Callback</title>
+    <script type="text/javascript">
+      function callback() {
+        // Get query hash: /#code=xxxx
+        var hash = window.location.hash
+        console.log(`Hash is ${hash}`)
+
+        if (hash && hash !== '') {
+          if (typeof MozActivity !== 'undefined') {
+            // For KaiOS 2.5
+            var activity = new MozActivity({
+              name: 'WiderListCallback',
+              data: { hash },
+            })
+          } else {
+            // For KaiOS 3.0
+            if (typeof WebActivity !== 'undefined') {
+              var activity = new WebActivity('WiderListCallback', {
+                type: 'code',
+                hash,
+              })
+              activity.start().then(
+                rv => {
+                  console.log('Results passed back from activity handler:')
+                  console.log(rv)
+                },
+                err => {
+                  console.log(err)
+                }
+              )
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body onload="callback()">
+    <h2>Redirecting you back to WiderList App...</h2>
+    <pre id="log" style="color: red"></pre>
+    <script>
+      ;(function () {
+        var old = console.log
+        var logger = document.getElementById('log')
+        console.log = function () {
+          for (var i = 0; i < arguments.length; i++) {
+            if (typeof arguments[i] == 'object') {
+              logger.innerHTML +=
+                (JSON && JSON.stringify
+                  ? JSON.stringify(arguments[i], undefined, 2)
+                  : arguments[i]) + '<br />'
+            } else {
+              logger.innerHTML += arguments[i] + '<br />'
+            }
+          }
+        }
+      })()
+    </script>
+  </body>
+</html>
