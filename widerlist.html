@@ -15,22 +15,22 @@
     <script type="text/javascript">
       function callback() {
         // Get query hash: /#code=xxxx
-        var hash = window.location.hash
-        console.log(`Hash is : ${hash}`)
+        var code = window.location.hash
+        console.log(`Hash is : ${code}`)
 
-        if (hash && hash !== '') {
+        if (code && code !== '') {
           if (typeof MozActivity !== 'undefined') {
             // For KaiOS 2.5
             var activity = new MozActivity({
               name: 'WiderListCallback',
-              data: { hash },
+              data: { code },
             })
           } else {
             // For KaiOS 3.0
             if (typeof WebActivity !== 'undefined') {
               var activity = new WebActivity('WiderListCallback', {
                 type: 'code',
-                hash,
+                code,
               })
               activity.start().then(
                 rv => {
@@ -49,7 +49,7 @@
   </head>
   <body onload="callback()">
     <h2>Redirecting you back to WiderList App...</h2>
-    <div style="width: 95%; overflow: hidden">
+    <div style="width: 95%">
       <span
         id="log"
         style="display: inline-block; overflow-wrap: break-word; color: green"
