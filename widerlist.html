@@ -37,6 +37,7 @@
                 rv => {
                   console.log('Results passed back from activity handler:')
                   console.log(rv)
+                  self.close()
                 },
                 err => {
                   console.log(err)
