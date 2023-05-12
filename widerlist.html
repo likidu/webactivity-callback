@@ -14,7 +14,7 @@
     </style>
     <script type="text/javascript">
       function callback() {
-        var name = 'OauthCallback'
+        var name = 'WiderListCallback'
         // Get query hash: /#code=xxxx
         var code = window.location.hash
         console.log(`Hash is : ${code}`)
@@ -37,7 +37,6 @@
                 rv => {
                   console.log('Results passed back from activity handler:')
                   console.log(rv)
-                  self.close()
                 },
                 err => {
                   console.log(err)
