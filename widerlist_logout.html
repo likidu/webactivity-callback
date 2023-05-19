@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/vite.svg" />
-    <title>WiderList Callback</title>
+    <title>WiderList Logout Callback</title>
     <style>
       body {
         font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI',
@@ -14,46 +13,39 @@
     </style>
     <script type="text/javascript">
       function callback() {
-        var name = 'OauthCallback'
-        // Get query hash: /#code=xxxx
-        var code = window.location.hash
-        console.log(`Hash is : ${code}`)
+        var name = 'OauthLogout'
 
-        if (code && code !== '') {
-          if (typeof MozActivity !== 'undefined') {
-            // For KaiOS 2.5
-            var activity = new MozActivity({
-              name,
-              data: { code },
+        if (typeof MozActivity !== 'undefined') {
+          // For KaiOS 2.5
+          var activity = new MozActivity({
+            name,
+          })
+        } else {
+          // For KaiOS 3.0
+          if (typeof WebActivity !== 'undefined') {
+            var activity = new WebActivity(name, {
+              type: 'logout',
             })
-          } else {
-            // For KaiOS 3.0
-            if (typeof WebActivity !== 'undefined') {
-              var activity = new WebActivity(name, {
-                type: 'code',
-                code,
-              })
-              activity.start().then(
-                rv => {
-                  console.log('Results passed back from activity handler:')
-                  console.log(rv)
-                },
-                e => {
-                  console.log(e)
-                }
-              )
-            }
+            activity.start().then(
+              rv => {
+                console.log('Results passed back from activity handler:')
+                console.log(rv)
+              },
+              e => {
+                console.log(e)
+              }
+            )
           }
         }
       }
     </script>
   </head>
   <body onload="callback()">
-    <h2>Redirecting you back to WiderList App...</h2>
+    <h2>Signing out and redirecting you back to WiderList App...</h2>
     <div style="width: 100%">
       <section
         id="log"
-        style="overflow-wrap: break-word; color: green"
+        style="overflow-wrap: break-word; color: blueviolet"
       ></section>
     </div>
     <script>
