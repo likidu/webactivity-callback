@@ -23,17 +23,14 @@
         } else {
           // For KaiOS 3.0
           if (typeof WebActivity !== 'undefined') {
-            var activity = new WebActivity(name, {
-              type: 'logout',
-            })
+            var activity = new WebActivity(name, {})
             activity.start().then(
-              rv => {
-                console.log('Results passed back from activity handler:')
-                console.log(rv)
-              },
-              e => {
-                console.log(e)
-              }
+              rv =>
+                console.log(
+                  'Results passed back from activity handler: ',
+                  result
+                ),
+              e => console.log(e)
             )
           }
         }

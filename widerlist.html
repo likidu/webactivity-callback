@@ -34,13 +34,12 @@
                 code,
               })
               activity.start().then(
-                rv => {
-                  console.log('Results passed back from activity handler:')
-                  console.log(rv)
-                },
-                e => {
-                  console.log(e)
-                }
+                result =>
+                  console.log(
+                    'Results passed back from activity handler: ',
+                    result
+                  ),
+                e => console.log(e)
               )
             }
           }
