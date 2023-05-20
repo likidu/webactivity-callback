@@ -13,11 +13,6 @@
       }
     </style>
     <script type="text/javascript">
-      var channel = new BroadcastChannel('sw-messages')
-      channel.addEventListener('message', ev => {
-        console.log('Channel msg received', ev.data.type)
-      })
-
       function callback() {
         var name = 'OauthCallback'
         // Get query hash: /#code=xxxx
